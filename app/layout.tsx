@@ -17,6 +17,8 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
+  // Задайте NEXT_PUBLIC_SITE_URL на хостинге, чтобы OG-картинки резолвились в абсолютные ссылки.
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
   title: `${site.name}: бамбуковые стеновые панели во Владивостоке и по России`,
   description:
     "Бамбуковые стеновые панели 2800×1200×8 мм от 2 000 ₽ за м². Замер и дизайн-проект в подарок, монтаж, доставка по всей России. Шоурум во Владивостоке.",

@@ -1,36 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OneWall: лендинг
 
-## Getting Started
+Одностраничный сайт магазина бамбуковых стеновых панелей [@onewall.vl](https://www.instagram.com/onewall.vl/)
+(Владивосток, доставка по России). Задача страницы: прогреть посетителя и передать его
+в личный WhatsApp продавца.
 
-First, run the development server:
+Дизайн повторяет структуру профиля Instagram: круглый логотип и ник в шапке и в хиро,
+ряд «актуального» вместо меню, сетка серий как лента, тёмная тема, один тёплый акцент.
+
+## Стек
+
+- Next.js 16 (App Router, TypeScript), Tailwind CSS v4, shadcn/ui (`components/ui`)
+- `motion/react` для появления секций, `lucide-react` для иконок
+- Шрифты Unbounded + Manrope через `next/font` (кириллица включена)
+
+## Запуск
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Продакшен-сборка: `npm run build`, затем `npm start`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Что править
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Что | Где |
+| --- | --- |
+| Ссылка, куда ведёт кнопка «Написать Артёму» (WhatsApp, Instagram, Telegram) | `lib/site.ts` → `site.seller.whatsapp` |
+| Цены, размер панели, доставка | `lib/site.ts` → `site.pricing` |
+| Адрес шоурума, телефон | `lib/site.ts` → `site.showroom`, `site.seller` |
+| Серии панелей и ссылки на Farpost | `lib/site.ts` → `series` |
+| Фотографии секций | `lib/site.ts` → `photos` |
+| Логотип | `public/brand/logo.jpg`, `app/icon.jpg`, `app/apple-icon.jpg` |
+| Домен для OG-разметки | переменная окружения `NEXT_PUBLIC_SITE_URL` |
 
-## Learn More
+## Фотографии
 
-To learn more about Next.js, take a look at the following resources:
+Сейчас стоят стоковые фото с Unsplash: рендеры с Farpost несут водяной знак, а лента
+Instagram состоит из обложек Reels с текстом. Замените на свои снимки объектов:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- `photos.hero`: главное фото в хиро
+- `photos.before` и `photos.after`: одна и та же комната до и после монтажа (секция «До и после»)
+- `series[].image`: по одному фото на серию
+- `photos.living`, `photos.wood`, `photos.montage`, `photos.bedroom`, `photos.hallway`: бенто и «актуальное»
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Локальные файлы кладите в `public/` и указывайте путь вида `/photos/hero.jpg`.
+Для внешних ссылок домен нужно добавить в `next.config.ts` → `images.remotePatterns`.
 
-## Deploy on Vercel
+## Структура
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+app/            layout (шрифты, метаданные), page (порядок секций), globals.css (тема)
+components/ui/  shadcn: button, image-comparison-slider
+components/landing/
+  header, hero, highlights, benefits, series, price + calculator,
+  before-after, process, proof, contacts, footer, reveal, primitives
+lib/site.ts     все данные магазина
+```
