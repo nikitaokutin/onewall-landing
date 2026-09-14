@@ -3,6 +3,12 @@
  * Всё, что может меняться (ссылки, цены, адрес), правится здесь.
  */
 
+const WHATSAPP_NUMBER = "79146918979";
+
+/** Ссылка в WhatsApp с готовым текстом сообщения. */
+export const whatsappWith = (text: string) =>
+  `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+
 export const site = {
   name: "OneWall",
   handle: "onewall.vl",
@@ -15,9 +21,7 @@ export const site = {
     name: "Артём",
     phone: "+7 914 691-89-79",
     phoneHref: "tel:+79146918979",
-    whatsapp:
-      "https://wa.me/79146918979?text=" +
-      encodeURIComponent("Здравствуйте! Пишу с сайта OneWall, хочу узнать про бамбуковые панели."),
+    whatsapp: whatsappWith("Здравствуйте! Пишу с сайта OneWall, хочу узнать про бамбуковые панели."),
     instagram: "https://www.instagram.com/onewall.vl/",
     farpost: "https://www.farpost.ru/user/OneWall/",
     email: "karmanov97@gmail.com",
@@ -63,7 +67,7 @@ export const series: Series[] = [
     name: "Дерево",
     short: "Тёплые древесные оттенки, самая популярная серия",
     price: 6900,
-    image: u("1621293954908-907159247fc8"),
+    image: u("1604014237800-1c9102c219da"),
     farpost:
       "https://www.farpost.ru/vladivostok/home/materials/ceiling/bambukovye-stenovye-paneli-serija-derevo-2800-1200-8mm-131969115.html",
   },
@@ -127,11 +131,11 @@ export const series: Series[] = [
 export const photos = {
   hero: u("1621293954908-907159247fc8", 1600),
   heroAlt: "Гостиная с бамбуковыми панелями и тёплой подсветкой",
-  before: u("1581858726788-75bc0f6a952d", 1600),
+  before: u("1596079890744-c1a0462d0975", 1600),
   after: u("1600585154084-4e5fe7c39198", 1600),
-  design: u("1581094288338-2314dddb7ece", 1200),
   montage: u("1513467535987-fd81bc7d62f8", 1200),
-  bedroom: u("1615874694520-474822394e73", 1200),
+  bedroom: u("1616486029423-aaa4789e8c9a", 1200),
   living: u("1600585152915-d208bec867a1", 1200),
-  wood: u("1604014237800-1c9102c219da", 1200),
+  wood: u("1600607687644-c7171b42498f", 1200),
+  hallway: u("1600566753086-00f18fb6b3ea", 1200),
 };
